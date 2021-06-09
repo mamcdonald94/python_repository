@@ -14,7 +14,7 @@ def countdown(num):
 print(countdown(5))
 
 # 2. Print and Return - Create a function that will receive a list with two
-# numbers. # Print the first value and return the second.
+# numbers. Print the first value and return the second.
 
 
 def print_and_return(lst):
