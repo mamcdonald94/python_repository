@@ -27,30 +27,29 @@ class User:
     def __init__(self, name, email):
         self.name = name
         self.email = email
-        self.account = BankAccount(int_rate=0.02, balance=0)
+        self.account = BankAccount(0.02)
 
     def make_deposit(self, amount):
-        self.account += amount
+        self.account.deposit(amount)
         return self
 
     def make_withdrawal(self, amount):
-        self.account -= amount
+        self.account.withdraw(amount)
         return self
 
     def transfer_money(self, other_user, amount):
-        self.account -= amount
-        other_user.account += amount
-        print(f"New {other_user.name} balance: ${other_user.account}")
-        print(f"New {self.name} balance: ${self.account}")
+        self.account.withdraw(amount)
+        other_user.account.deposit(amount)
         return self
 
     def display_user_balance(self):
-        print(f"User: {self.name}, Balance: ${self.account}")
+        self.account.display_account_info()
         return self
 
 
+mark = User("Mark", "fakemail@email.org")
+rebekah = User("Bekah", "fakemail@realmail.org")
 
-mamcdonald94 = User("Mark", "fakemail@email.org")
-
-
-mamcdonald94.account.deposit(1000).display_account_info().yield_interest().display_account_info()
+mark.make_deposit(100).make_withdrawal(50).display_user_balance()
+rebekah.make_deposit(600).transfer_money(mark, 500).display_user_balance()
+mark.display_user_balance()
